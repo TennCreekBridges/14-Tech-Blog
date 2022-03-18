@@ -6,17 +6,23 @@ const exphbs = require('express-handlebars');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const sequelize = require("./config/connection");
+const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+
+// establish session rules
 const sess = {
-  secret: 'Super secret secret',
-  cookie: {},
-  resave: false,
+  secret: "secretSquirrel",
+  cookie: {
+    // end session on idle for 10 minutes
+    expires: 10 * 60 * 1000,
+  },
+  resave: true,
+  rolling: true,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize
-  })
+    db: sequelize,
+  }),
 };
 
 app.use(session(sess));
