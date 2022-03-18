@@ -1,7 +1,5 @@
 const { Comment } = require('../models');
 
-// test
-
 const commentdata = [
   {
     comment_text: 'Nunc rhoncus dui vel sem.',
